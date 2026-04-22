@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+int mergeFiles(int arraySize, char ** filesArray, char * outName);
+
 int main(){
     FILE * pFileInput;
     char buffer[1024];
@@ -24,7 +26,17 @@ int main(){
     scanf("%s", outputName);  
     printf("%s", outputName);
 
-    pFileOutput = fopen(outputName, "w");
+    mergeFiles(arraySize, filesArray, outputName);
+    free(filesArray);
+    return 0;
+}
+
+int mergeFiles(int arraySize, char ** filesArray, char * outName){
+    FILE * pFileOutput;
+    FILE * pFileInput;
+    char buffer[1024];
+
+    pFileOutput = fopen(outName, "w");
     
     for (int i=0; i<arraySize; i++){
         printf("%s", filesArray[i]);
@@ -41,11 +53,6 @@ int main(){
         printf("\n");
         fprintf(pFileOutput, "\n");
     }
-
-    for (int i=0; i<arraySize; i++){
-        free(filesArray[i]);
-    }
     fclose(pFileOutput);
-    free(filesArray);
     return 0;
 }
