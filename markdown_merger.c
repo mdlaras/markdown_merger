@@ -27,6 +27,12 @@ int main(){
     printf("%s", outputName);
 
     mergeFiles(arraySize, filesArray, outputName);
+
+    for (int i = 0; i < arraySize; i++)
+    {
+        free(filesArray[i]);
+    }
+
     free(filesArray);
     return 0;
 }
